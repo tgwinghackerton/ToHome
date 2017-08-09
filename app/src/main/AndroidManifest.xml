@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MissingPersonActivity" />
+        <activity android:name=".MissingPersonListActivity" />
 
         <activity android:name=".AlarmActivity" />
 

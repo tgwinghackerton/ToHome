@@ -1,4 +1,4 @@
-package b05studio.com.mpf;
+package b05studio.com.mpf.model;
 
 /**
  * Created by mansu on 2017-07-05.

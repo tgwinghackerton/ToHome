@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import b05studio.com.mpf.model.AlarmInfo;
+
 /**
  * Created by mansu on 2017-07-05.
  */
