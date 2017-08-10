@@ -3,7 +3,7 @@
     package="b05studio.com.mpf">
 
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -22,18 +22,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".MissingPersonListActivity" />
-
         <activity android:name=".AlarmActivity" />
-
         <activity android:name=".RegisterActivity" />
-
         <activity android:name=".LockScreenActivity" />
 
         <service android:name=".ScreenService" />
 
         <receiver android:name=".ScreenReceiver" />
+
+        <activity android:name=".RegisterFirstActivity" />
+        <activity android:name=".RegisterSecondActivity" />
+        <activity android:name=".RegisterThirdActivity" />
+        <activity android:name=".RegisterFourthActivity"></activity>
     </application>
 
 </manifest>
