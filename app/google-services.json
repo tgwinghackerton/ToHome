@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1000304417773",
+    "firebase_url": "https://seeyouagain-f0804.firebaseio.com",
+    "project_id": "seeyouagain-f0804",
+    "storage_bucket": "seeyouagain-f0804.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1000304417773:android:ff10ed58cddd9600",
+        "android_client_info": {
+          "package_name": "b05studio.com.seeyouagain"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1000304417773-rnnp1q3d8pkn7k14n9b76hqra1idk9i4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtkIdhabYLR4HQ1lOdgEICMqElK_SMZhE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

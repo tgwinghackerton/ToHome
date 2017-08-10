@@ -1,16 +1,13 @@
-package b05studio.com.mpf;
+package b05studio.com.seeyouagain;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class RegisterFirstActivity extends AppCompatActivity {
+public class RegisterFourthActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_first);
+        setContentView(R.layout.activity_register_fourth);
     }
-
-
-
 }

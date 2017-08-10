@@ -1,4 +1,4 @@
-package b05studio.com.mpf;
+package b05studio.com.seeyouagain;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

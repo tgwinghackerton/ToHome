@@ -1,4 +1,4 @@
-package b05studio.com.mpf;
+package b05studio.com.seeyouagain;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import b05studio.com.mpf.model.AlarmInfo;
+import b05studio.com.seeyouagain.model.AlarmInfo;
 
 /**
  * Created by mansu on 2017-07-05.

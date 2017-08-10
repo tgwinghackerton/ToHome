@@ -1,4 +1,4 @@
-package b05studio.com.mpf;
+package b05studio.com.seeyouagain;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +16,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
-import b05studio.com.mpf.model.MissingPersonInfo;
+import b05studio.com.seeyouagain.model.MissingPersonInfo;
 import butterknife.BindView;
 
 /**
