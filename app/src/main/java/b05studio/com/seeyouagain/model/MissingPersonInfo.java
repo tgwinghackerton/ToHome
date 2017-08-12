@@ -1,23 +1,29 @@
 package b05studio.com.seeyouagain.model;
 
-import com.google.firebase.database.Exclude;
+/**
+ * Created by mansu on 2017-08-13.
+ */
 
 import java.io.Serializable;
-import java.util.Calendar;
+
+        import com.google.firebase.database.Exclude;
+
+        import java.io.Serializable;
+        import java.util.Calendar;
 
 /**
  * Created by mansu on 2017-07-05.
  */
 
-public class MissingPersonInfo implements Serializable{
+public class MissingPersonInfo implements Serializable {
 
     private String beforeUrl; // 이미지 유알엘
     private String afterUrl; // 이미지 처리 후 유알엘
     private String aword;   // 한마디
     private String name; // 이름
     private String gender; // 성별
-    private Calendar timeOfMissing; // 실종시간
-    private Calendar birth;
+    private long timeOfMissing; // 실종시간
+    private int age;
     private String address;  // 주소
     private String circumstanceOfOccurance; // 발생경위
     private String physicalCharacteristics; // 신체특징
@@ -25,13 +31,15 @@ public class MissingPersonInfo implements Serializable{
     private String etc; // 기타
     private String writerKey;
 
-    public MissingPersonInfo(String beforeUrl, String afterUrl, String name, String gender, Calendar timeOfMissing, Calendar birth, String address, String aword, String circumstanceOfOccurance, String physicalCharacteristics, String dressMarks, String etc, String writerKey) {
+    public MissingPersonInfo() {}
+
+    public MissingPersonInfo(String beforeUrl, String afterUrl, String name, String gender, long timeOfMissing, int age, String address, String aword, String circumstanceOfOccurance, String physicalCharacteristics, String dressMarks, String etc, String writerKey) {
         this.beforeUrl = beforeUrl;
         this.afterUrl = afterUrl;
         this.name = name;
         this.gender = gender;
         this.timeOfMissing = timeOfMissing;
-        this.birth = birth;
+        this.age = age;
         this.address = address;
         this.aword = aword;
         this.circumstanceOfOccurance = circumstanceOfOccurance;
@@ -73,14 +81,6 @@ public class MissingPersonInfo implements Serializable{
         this.gender = gender;
     }
 
-    public Calendar getBirth() {
-        return birth;
-    }
-
-    public void setBirth(Calendar birth) {
-        this.birth = birth;
-    }
-
     public String getAddress() {
         return address;
     }
@@ -97,11 +97,11 @@ public class MissingPersonInfo implements Serializable{
         this.aword = aword;
     }
 
-    public Calendar getTimeOfMissing() {
+    public long getTimeOfMissing() {
         return timeOfMissing;
     }
 
-    public void setTimeOfMissing(Calendar timeOfMissing) {
+    public void setTimeOfMissing(long timeOfMissing) {
         this.timeOfMissing = timeOfMissing;
     }
 
@@ -143,5 +143,13 @@ public class MissingPersonInfo implements Serializable{
 
     public void setWriterKey(String writerKey) {
         this.writerKey = writerKey;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }

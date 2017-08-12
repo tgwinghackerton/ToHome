@@ -11,8 +11,6 @@ import java.util.Calendar;
 
 import b05studio.com.seeyouagain.model.AlarmInfo;
 import b05studio.com.seeyouagain.model.MissingPersonInfo;
-import b05studio.com.seeyouagain.model.User;
-import butterknife.BindView;
 
 /**
  * Created by mansu on 2017-08-12.

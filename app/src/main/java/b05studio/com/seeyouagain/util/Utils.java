@@ -1,6 +1,10 @@
 package b05studio.com.seeyouagain.util;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+
+import b05studio.com.seeyouagain.model.MissingPersonInfo;
 
 /**
  * Created by mansu on 2017-08-11.
@@ -24,14 +28,13 @@ public class Utils {
             return (timeDiff/(31104000000L))+"년 전";
     }
 
-    public static int getAge(Calendar calendar) {
+    public static int getAge(long timestamp, int age) {
         Calendar today = Calendar.getInstance();
+        Calendar before = Calendar.getInstance();
+        before.setTimeInMillis(timestamp);
 
-        int age = today.get(Calendar.YEAR) - calendar.get(Calendar.YEAR);
-        if (today.get(Calendar.DAY_OF_YEAR) < calendar.get(Calendar.DAY_OF_YEAR))
-            age--;
-        Integer ageInt = new Integer(age);
+        int diff = today.get(Calendar.YEAR) - before.get(Calendar.YEAR);
 
-        return ageInt;
+        return diff + age;
     }
 }

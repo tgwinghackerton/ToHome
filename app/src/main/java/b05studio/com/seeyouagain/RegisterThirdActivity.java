@@ -34,6 +34,9 @@ public class RegisterThirdActivity extends AppCompatActivity {
         String wear = register3WearEditText.getText().toString();
 
         if (accident.length() > 0 && body.length() > 0 && wear.length() > 0) {
+            RegisterActivity.info.setCircumstanceOfOccurance(accident);
+            RegisterActivity.info.setPhysicalCharacteristics(body);
+            RegisterActivity.info.setDressMarks(wear);
             Intent intent = new Intent(this,RegisterFourthActivity.class);
             startActivity(intent);
         } else {

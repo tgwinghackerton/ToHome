@@ -262,6 +262,8 @@ public class LoginActivity extends DialogActivity implements
                         } else { // 존재할경우 -> 불러와야함
                             String token = FirebaseInstanceId.getInstance().getToken();
                             user.setToken(token);
+                            user.setUserLikeList(getUserFromDB.getUserLikeList());
+                            user.setAlarmInfos(getUserFromDB.getAlarmInfos());
                             myRef.child(uid).setValue(user);
                             Log.i("기존 유저정보", user.toString());
                         }

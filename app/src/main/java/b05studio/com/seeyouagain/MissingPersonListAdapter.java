@@ -11,13 +11,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.List;
 import java.util.Map;
 
 import b05studio.com.seeyouagain.listener.EmptyListener;
@@ -55,8 +51,8 @@ public class MissingPersonListAdapter extends RecyclerView.Adapter<MissingPerson
 
     @Override
     public void onBindViewHolder(ListHolder holder, final int position) {
-        final MissingPersonInfo info = missingPersonInfos.get((missingPersonInfos.keySet().toArray())[position]);
-        final String key = (String)(missingPersonInfos.keySet().toArray())[position];
+        final String key = (String) (missingPersonInfos.keySet().toArray()[position]);
+        final MissingPersonInfo info = missingPersonInfos.get(key);
 
         holder.wrapper.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,20 +66,19 @@ public class MissingPersonListAdapter extends RecyclerView.Adapter<MissingPerson
 
         Picasso.with(context).load(info.getBeforeUrl()).into(holder.before);
         Picasso.with(context).load(info.getAfterUrl()).into(holder.after);
-        holder.namegenderage.setText(info.getName() + " (" + info.getGender() + ", 현재 " + Utils.getAge(info.getBirth()) + "세)");
+        holder.namegenderage.setText(info.getName() + " (" + info.getGender() + ", 현재 " + Utils.getAge(info.getTimeOfMissing(), info.getAge()) + "세)");
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy년 mm월 dd일");
-        holder.birth.setText(format.format(info.getTimeOfMissing().getTime()) + "(당시 만 " + (Utils.getAge(info.getBirth()) - Utils.getAge(info.getTimeOfMissing())) + "세)");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일");
+        holder.birth.setText(format.format(info.getTimeOfMissing()) + "(당시 만 " + info.getAge() + "세)");
         holder.address.setText(info.getAddress());
         holder.aword.setText(info.getAword());
 
-        if(User.getUserInstance().getUserLikeList().indexOf(key) != -1) {
+        if (User.getUserInstance().getUserLikeList().indexOf(key) != -1) {
             holder.like.setImageResource(R.drawable.icon_heart_full);
-            holder.like.setOnClickListener(new FullListener(holder.like, key));
-        }
-        else {
+            holder.like.setOnClickListener(new FullListener(context, holder.like, key));
+        } else {
             holder.like.setImageResource(R.drawable.icon_heart_empty);
-            holder.like.setOnClickListener(new EmptyListener(holder.like, key));
+            holder.like.setOnClickListener(new EmptyListener(context, holder.like, key));
         }
     }
 

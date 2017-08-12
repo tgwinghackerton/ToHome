@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class RegisterFourthActivity extends AppCompatActivity {
@@ -22,7 +23,9 @@ public class RegisterFourthActivity extends AppCompatActivity {
     @OnClick(R.id.registerNextButton)
     public void onNextClick(View view) {
         String rest = register4RestEditText.getText().toString();
-        Intent intent = new Intent(this,RegisterFourthActivity.class);
+
+        RegisterActivity.info.setEtc(rest);
+        Intent intent = new Intent(this,RegisterCheckActivity.class);
         startActivity(intent);
     }
 
@@ -30,5 +33,6 @@ public class RegisterFourthActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_fourth);
+        ButterKnife.bind(this);
     }
 }

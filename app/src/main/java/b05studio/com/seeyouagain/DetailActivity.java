@@ -65,20 +65,20 @@ public class DetailActivity extends AppCompatActivity {
 
         Picasso.with(this).load(info.getBeforeUrl()).into(before);
         Picasso.with(this).load(info.getAfterUrl()).into(after);
-        namegenderage.setText(info.getName() + " (" + info.getGender() + ", 현재 " + Utils.getAge(info.getBirth()) + "세)");
+        namegenderage.setText(info.getName() + " (" + info.getGender() + ", 현재 " + Utils.getAge(info.getTimeOfMissing(), info.getAge()) + "세)");
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy년 mm월 dd일");
-        birth.setText(format.format(info.getTimeOfMissing().getTime()) + "(당시 만 " + (Utils.getAge(info.getBirth()) - Utils.getAge(info.getTimeOfMissing())) + "세)");
+        birth.setText(format.format(info.getTimeOfMissing()) + "(당시 만 " + info.getAge() + "세)");
         address.setText(info.getAddress());
         //aword.setText(info.getAword());
 
         if(User.getUserInstance().getUserLikeList().indexOf(key) != -1) {
             like.setImageResource(R.drawable.icon_heart_full);
-            like.setOnClickListener(new FullListener(like, key));
+            like.setOnClickListener(new FullListener(this, like, key));
         }
         else {
             like.setImageResource(R.drawable.icon_heart_empty);
-            like.setOnClickListener(new EmptyListener(like, key));
+            like.setOnClickListener(new EmptyListener(this, like, key));
         }
 
         circumstanceOfOccurance.setText(info.getCircumstanceOfOccurance());

@@ -13,8 +13,11 @@ import android.app.DatePickerDialog;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.BindViews;
@@ -48,6 +51,17 @@ public class RegisterFirstActivity extends AppCompatActivity {
         String dateString = registerDateEditText.getText().toString();
 
         if (name.length() > 0 && gender.length() > 0 && age.length() > 0 && dateString.length() > 0) {
+            RegisterActivity.info.setName(name);
+            RegisterActivity.info.setGender(gender);
+            RegisterActivity.info.setAge(Integer.parseInt(age));
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일", Locale.KOREAN);
+            try {
+                cal.setTime(sdf.parse(dateString));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            RegisterActivity.info.setTimeOfMissing(cal.getTimeInMillis());
             Intent intent = new Intent(this,RegisterSecondActivity.class);
             startActivity(intent);
         } else {
@@ -56,7 +70,7 @@ public class RegisterFirstActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.registerDateEditText)
-    public void openDatePickerDiaglog() {
+    public void openDatePickerDiaglog(View view) {
         GregorianCalendar calendar = new GregorianCalendar();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);

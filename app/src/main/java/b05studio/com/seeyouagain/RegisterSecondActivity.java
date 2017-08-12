@@ -34,6 +34,7 @@ public class RegisterSecondActivity extends AppCompatActivity {
         String detailadress = register2DetailAddressEditText.getText().toString();
 
         if (sido.length() > 0 && sigungu.length() > 0 && detailadress.length() > 0) {
+            RegisterActivity.info.setAddress(sido + " " + sigungu + " " + detailadress);
             Intent intent = new Intent(this,RegisterThirdActivity.class);
             startActivity(intent);
         } else {
