@@ -10,7 +10,4 @@ public class RegisterFirstActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_first);
     }
-
-
-
 }
