@@ -8,17 +8,17 @@
 
     <View
         android:id="@+id/registerTitleView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="56dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="0dp"
         android:background="#2A644F"
 
         />
     
     <ImageView
+        android:id="@+id/registerBackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_back_button"
@@ -144,6 +144,7 @@
         />
 
     <ImageButton
+        android:id="@+id/registerNextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintRight_toRightOf="parent"

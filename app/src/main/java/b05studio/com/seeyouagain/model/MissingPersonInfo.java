@@ -10,18 +10,19 @@ import java.util.Calendar;
  */
 
 public class MissingPersonInfo implements Serializable{
-    private String beforeUrl;
-    private String afterUrl;
-    private String name;
-    private String gender;
-    private Calendar timeOfMissing;
+
+    private String beforeUrl; // 이미지 유알엘
+    private String afterUrl; // 이미지 처리 후 유알엘
+    private String aword;   // 한마디
+    private String name; // 이름
+    private String gender; // 성별
+    private Calendar timeOfMissing; // 실종시간
     private Calendar birth;
-    private String address;
-    private String aword;
-    private String circumstanceOfOccurance;
-    private String physicalCharacteristics;
-    private String dressMarks;
-    private String etc;
+    private String address;  // 주소
+    private String circumstanceOfOccurance; // 발생경위
+    private String physicalCharacteristics; // 신체특징
+    private String dressMarks; // 옷
+    private String etc; // 기타
     private String writerKey;
 
     public MissingPersonInfo(String beforeUrl, String afterUrl, String name, String gender, Calendar timeOfMissing, Calendar birth, String address, String aword, String circumstanceOfOccurance, String physicalCharacteristics, String dressMarks, String etc, String writerKey) {
