@@ -10,7 +10,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent intent2 = new Intent(this, LoginActivity.class);
-        startService(intent2);
+        Intent intent = new Intent(this, MissingPersonListActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

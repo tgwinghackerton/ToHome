@@ -18,8 +18,25 @@ public class MissingPersonInfo implements Serializable{
     private Calendar birth;
     private String address;
     private String aword;
-    @Exclude
-    private MissingPersonInfoDetail detail;
+    private String circumstanceOfOccurance;
+    private String physicalCharacteristics;
+    private String dressMarks;
+    private String etc;
+
+    public MissingPersonInfo(String beforeUrl, String afterUrl, String name, String gender, Calendar timeOfMissing, Calendar birth, String address, String aword, String circumstanceOfOccurance, String physicalCharacteristics, String dressMarks, String etc) {
+        this.beforeUrl = beforeUrl;
+        this.afterUrl = afterUrl;
+        this.name = name;
+        this.gender = gender;
+        this.timeOfMissing = timeOfMissing;
+        this.birth = birth;
+        this.address = address;
+        this.aword = aword;
+        this.circumstanceOfOccurance = circumstanceOfOccurance;
+        this.physicalCharacteristics = physicalCharacteristics;
+        this.dressMarks = dressMarks;
+        this. etc = etc;
+    }
 
     public String getBeforeUrl() {
         return beforeUrl;
@@ -77,19 +94,43 @@ public class MissingPersonInfo implements Serializable{
         this.aword = aword;
     }
 
-    public MissingPersonInfoDetail getDetail() {
-        return detail;
-    }
-
-    public void setDetail(MissingPersonInfoDetail detail) {
-        this.detail = detail;
-    }
-
     public Calendar getTimeOfMissing() {
         return timeOfMissing;
     }
 
     public void setTimeOfMissing(Calendar timeOfMissing) {
         this.timeOfMissing = timeOfMissing;
+    }
+
+    public String getCircumstanceOfOccurance() {
+        return circumstanceOfOccurance;
+    }
+
+    public void setCircumstanceOfOccurance(String circumstanceOfOccurance) {
+        this.circumstanceOfOccurance = circumstanceOfOccurance;
+    }
+
+    public String getPhysicalCharacteristics() {
+        return physicalCharacteristics;
+    }
+
+    public void setPhysicalCharacteristics(String physicalCharacteristics) {
+        this.physicalCharacteristics = physicalCharacteristics;
+    }
+
+    public String getDressMarks() {
+        return dressMarks;
+    }
+
+    public void setDressMarks(String dressMarks) {
+        this.dressMarks = dressMarks;
+    }
+
+    public String getEtc() {
+        return etc;
+    }
+
+    public void setEtc(String etc) {
+        this.etc = etc;
     }
 }

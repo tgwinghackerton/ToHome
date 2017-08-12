@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by mansu on 2017-07-05.
@@ -22,6 +23,7 @@ public class InterestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interest);
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
         InterestAdapter adapter = new InterestAdapter(this);

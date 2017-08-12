@@ -20,8 +20,11 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
+import b05studio.com.seeyouagain.listener.EmptyListener;
+import b05studio.com.seeyouagain.listener.FullListener;
 import b05studio.com.seeyouagain.model.MissingPersonInfo;
 import b05studio.com.seeyouagain.model.User;
+import b05studio.com.seeyouagain.util.Utils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -52,85 +55,44 @@ public class MissingPersonListAdapter extends RecyclerView.Adapter<MissingPerson
 
     @Override
     public void onBindViewHolder(ListHolder holder, final int position) {
+        final MissingPersonInfo info = missingPersonInfos.get((missingPersonInfos.keySet().toArray())[position]);
+        final String key = (String)(missingPersonInfos.keySet().toArray())[position];
+
         holder.wrapper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, DetailActivity.class);
-                intent.putExtra("key", (String)((List)missingPersonInfos.keySet()).get(position));
-                intent.putExtra("info", (MissingPersonInfo)(missingPersonInfos.keySet().toArray())[position]);
+                intent.putExtra("info", info);
+                intent.putExtra("key", key);
                 context.startActivity(intent);
             }
         });
-        MissingPersonInfo info = (MissingPersonInfo)(missingPersonInfos.keySet().toArray())[position];
+
         Picasso.with(context).load(info.getBeforeUrl()).into(holder.before);
         Picasso.with(context).load(info.getAfterUrl()).into(holder.after);
-        holder.namegenderage.setText(info.getName() + " (" + info.getGender() + ", 현재 " + getAge(info.getBirth()) + "세)");
+        holder.namegenderage.setText(info.getName() + " (" + info.getGender() + ", 현재 " + Utils.getAge(info.getBirth()) + "세)");
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy년 mm월 dd일");
-        holder.birth.setText(format.format(info.getTimeOfMissing().getTime()) + "(당시 만 " + (getAge(info.getBirth()) - getAge(info.getTimeOfMissing())) + "세)");
+        holder.birth.setText(format.format(info.getTimeOfMissing().getTime()) + "(당시 만 " + (Utils.getAge(info.getBirth()) - Utils.getAge(info.getTimeOfMissing())) + "세)");
+        holder.address.setText(info.getAddress());
         holder.aword.setText(info.getAword());
 
-        if(User.INSTANCE.getUserLikeList().indexOf(((String)((List)missingPersonInfos.keySet()).get(position))) != -1) {
+        if(User.INSTANCE.getUserLikeList().indexOf(key) != -1) {
             holder.like.setImageResource(R.drawable.icon_heart_full);
-            holder.like.setOnClickListener(new FullListener(holder.like, (String)((List)missingPersonInfos.keySet()).get(position)));
+            holder.like.setOnClickListener(new FullListener(holder.like, key));
         }
         else {
             holder.like.setImageResource(R.drawable.icon_heart_empty);
-            holder.like.setOnClickListener(new EmptyListener(holder.like, (String)((List)missingPersonInfos.keySet()).get(position)));
+            holder.like.setOnClickListener(new EmptyListener(holder.like, key));
         }
-    }
-
-    private class EmptyListener implements View.OnClickListener {
-        private ImageButton like;
-        private String key;
-
-        public EmptyListener(ImageButton like, String key) {
-            this.like = like;
-            this.key = key;
-        }
-
-        @Override
-        public void onClick(View view) {
-            if(User.INSTANCE.getUserLikeList().indexOf(key) == -1) {
-                User.INSTANCE.getUserLikeList().add(key);
-                FirebaseDatabase.getInstance().getReference().child("user").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("userLikeList").setValue(User.INSTANCE.getUserLikeList());
-            }
-            like.setImageResource(R.drawable.icon_heart_full);
-            view.setOnClickListener(new FullListener(like, key));
-        }
-    };
-
-    private class FullListener implements View.OnClickListener {
-        private ImageButton like;
-        private String key;
-
-        public FullListener(ImageButton like, String key) {
-            this.like = like;
-            this.key = key;
-        }
-
-        @Override
-        public void onClick(View view) {
-            FirebaseDatabase.getInstance().getReference().child("user").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("userLikeList").child(key).removeValue();
-            like.setImageResource(R.drawable.icon_heart_empty);
-            view.setOnClickListener(new EmptyListener(like, key));
-        }
-    };
-
-    private int getAge(Calendar calendar) {
-        Calendar today = Calendar.getInstance();
-
-        int age = today.get(Calendar.YEAR) - calendar.get(Calendar.YEAR);
-        if (today.get(Calendar.DAY_OF_YEAR) < calendar.get(Calendar.DAY_OF_YEAR))
-            age--;
-        Integer ageInt = new Integer(age);
-
-        return ageInt;
     }
 
     @Override
     public int getItemCount() {
-        return missingPersonInfos.size();
+        if(missingPersonInfos == null)
+            return 0;
+        else
+            return missingPersonInfos.size();
     }
 
     public final static class ListHolder extends RecyclerView.ViewHolder {

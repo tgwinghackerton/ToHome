@@ -2,6 +2,7 @@ package b05studio.com.seeyouagain.model;
 
 import com.google.firebase.database.Exclude;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,8 +15,8 @@ public enum User {
     private String email;
     private String name;
     private String phoneNumber;
-    private List<String> userLikeList;
-    private HashMap<String, AlarmInfo> alarmInfos;
+    private List<String> userLikeList = new ArrayList<>();
+    private HashMap<String, AlarmInfo> alarmInfos = new HashMap<>();
 
     @Exclude
     private String password;
