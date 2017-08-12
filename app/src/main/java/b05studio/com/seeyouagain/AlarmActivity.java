@@ -35,8 +35,8 @@ public class AlarmActivity extends AppCompatActivity {
 
         AlarmAdapter adapter = new AlarmAdapter(this);
         HashMap<String,AlarmInfo> infos = new HashMap<>();
-        infos.put("1", new AlarmInfo("1", "최재열", Calendar.getInstance(), "제가 오늘 학교앞에서 비슷한 아이를 발견했습니다. 사진 첨부해드립니다."));
-        infos.put("2", new AlarmInfo("1", "최재열", Calendar.getInstance(), "제가 오늘 학교앞에서 비슷한 아이를 발견했습니다. 사진 첨부해드립니다."));
+        infos.put("1", new AlarmInfo("1", "1", "최재열", Calendar.getInstance(), "제가 오늘 학교앞에서 비슷한 아이를 발견했습니다. 사진 첨부해드립니다."));
+        infos.put("2", new AlarmInfo("1", "1", "최재열", Calendar.getInstance(), "제가 오늘 학교앞에서 비슷한 아이를 발견했습니다. 사진 첨부해드립니다."));
         adapter.setAlarmInfos(infos);
         recyclerView.setAdapter(adapter);
     }

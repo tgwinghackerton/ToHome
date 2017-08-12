@@ -22,12 +22,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".LoginActivity" android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="b05studio.com.seeyouagain.MissingPersonListActivity" android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="b05studio.com.seeyouagain.DetailActivity" android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="b05studio.com.seeyouagain.SearchActivity" android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="b05studio.com.seeyouagain.AlarmActivity" android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name="b05studio.com.seeyouagain.RegisterActivity" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name="b05studio.com.seeyouagain.LockScreenActivity" android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name="b05studio.com.seeyouagain.RegisterFirstActivity" android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name="b05studio.com.seeyouagain.RegisterSecondActivity" android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name="b05studio.com.seeyouagain.RegisterThirdActivity" android:theme="@style/AppTheme.NoActionBar"/>

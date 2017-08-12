@@ -77,7 +77,7 @@ public class MissingPersonListAdapter extends RecyclerView.Adapter<MissingPerson
         holder.address.setText(info.getAddress());
         holder.aword.setText(info.getAword());
 
-        if(User.INSTANCE.getUserLikeList().indexOf(key) != -1) {
+        if(User.getUserInstance().getUserLikeList().indexOf(key) != -1) {
             holder.like.setImageResource(R.drawable.icon_heart_full);
             holder.like.setOnClickListener(new FullListener(holder.like, key));
         }

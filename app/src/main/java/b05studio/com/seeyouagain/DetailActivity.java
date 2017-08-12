@@ -50,6 +50,9 @@ public class DetailActivity extends AppCompatActivity {
     @BindView(R.id.detail_etc)
     TextView etc;
 
+    private MissingPersonInfo info;
+    private String key;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,8 +60,8 @@ public class DetailActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
-        MissingPersonInfo info = (MissingPersonInfo)getIntent().getSerializableExtra("info");
-        String key = getIntent().getStringExtra("key");
+        info = (MissingPersonInfo)getIntent().getSerializableExtra("info");
+        key = getIntent().getStringExtra("key");
 
         Picasso.with(this).load(info.getBeforeUrl()).into(before);
         Picasso.with(this).load(info.getAfterUrl()).into(after);
@@ -69,7 +72,7 @@ public class DetailActivity extends AppCompatActivity {
         address.setText(info.getAddress());
         //aword.setText(info.getAword());
 
-        if(User.INSTANCE.getUserLikeList().indexOf(key) != -1) {
+        if(User.getUserInstance().getUserLikeList().indexOf(key) != -1) {
             like.setImageResource(R.drawable.icon_heart_full);
             like.setOnClickListener(new FullListener(like, key));
         }
@@ -91,7 +94,9 @@ public class DetailActivity extends AppCompatActivity {
 
     @OnClick(R.id.detail_fab)
     public void fabClick(View view) {
-        Intent intent = new Intent(DetailActivity.this, RegisterActivity.class);
+        Intent intent = new Intent(DetailActivity.this, ReportActivity.class);
+        intent.putExtra("info", info);
+        intent.putExtra("key", key);
         startActivity(intent);
     }
 }

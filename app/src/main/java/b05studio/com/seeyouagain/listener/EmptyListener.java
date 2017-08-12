@@ -24,9 +24,10 @@ public class EmptyListener implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if(User.INSTANCE.getUserLikeList().indexOf(key) == -1) {
-            User.INSTANCE.getUserLikeList().add(key);
-            FirebaseDatabase.getInstance().getReference().child("user").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("userLikeList").setValue(User.INSTANCE.getUserLikeList());
+        User user = User.getUserInstance();
+        if(user.getUserLikeList().indexOf(key) == -1) {
+            user.getUserLikeList().add(key);
+            FirebaseDatabase.getInstance().getReference().child("user").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("userLikeList").setValue(user.getUserLikeList());
         }
         like.setImageResource(R.drawable.icon_heart_full);
         view.setOnClickListener(new FullListener(like, key));
