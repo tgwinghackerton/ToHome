@@ -26,15 +26,10 @@
         <activity android:name="b05studio.com.seeyouagain.AlarmActivity" />
         <activity android:name="b05studio.com.seeyouagain.RegisterActivity" />
         <activity android:name="b05studio.com.seeyouagain.LockScreenActivity" />
-
-        <service android:name="b05studio.com.seeyouagain.ScreenService" />
-
-        <receiver android:name="b05studio.com.seeyouagain.ScreenReceiver" />
-
         <activity android:name="b05studio.com.seeyouagain.RegisterFirstActivity" />
         <activity android:name="b05studio.com.seeyouagain.RegisterSecondActivity" />
         <activity android:name="b05studio.com.seeyouagain.RegisterThirdActivity" />
-        <activity android:name="b05studio.com.seeyouagain.RegisterFourthActivity"></activity>
+        <activity android:name="b05studio.com.seeyouagain.RegisterFourthActivity"/>
     </application>
 
 </manifest>

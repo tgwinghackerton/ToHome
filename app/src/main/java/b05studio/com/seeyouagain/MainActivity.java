@@ -10,9 +10,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent intent = new Intent(this, ScreenService.class);
-        startService(intent);
-
         Intent intent2 = new Intent(this, LoginActivity.class);
         startService(intent2);
     }

@@ -42,8 +42,6 @@ public class MissingPersonListActivity extends AppCompatActivity {
     @BindView(R.id.list_recyclerview)
     RecyclerView recyclerView;
 
-    private MissingPersonListAdapter adapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,12 +79,12 @@ public class MissingPersonListActivity extends AppCompatActivity {
             }
         });
 
-        adapter = new MissingPersonListAdapter(this);
+        MissingPersonListAdapter adapter = new MissingPersonListAdapter(this);
         recyclerView.setAdapter(adapter);
-        updateMissingPersonInfos();
+        updateMissingPersonInfos(adapter);
     }
 
-    public void updateMissingPersonInfos() {
+    public void updateMissingPersonInfos(final MissingPersonListAdapter adapter) {
         FirebaseDatabase.getInstance().getReference().child("mpi").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

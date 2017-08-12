@@ -22,6 +22,8 @@ import java.util.Map;
 
 import b05studio.com.seeyouagain.model.MissingPersonInfo;
 import b05studio.com.seeyouagain.model.User;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by mansu on 2017-07-05.
@@ -55,7 +57,7 @@ public class MissingPersonListAdapter extends RecyclerView.Adapter<MissingPerson
             public void onClick(View view) {
                 Intent intent = new Intent(context, DetailActivity.class);
                 intent.putExtra("key", (String)((List)missingPersonInfos.keySet()).get(position));
-                intent.putExtra("key", (MissingPersonInfo)(missingPersonInfos.keySet().toArray())[position]);
+                intent.putExtra("info", (MissingPersonInfo)(missingPersonInfos.keySet().toArray())[position]);
                 context.startActivity(intent);
             }
         });
@@ -132,25 +134,26 @@ public class MissingPersonListAdapter extends RecyclerView.Adapter<MissingPerson
     }
 
     public final static class ListHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.missingperson_wrapper)
         ConstraintLayout wrapper;
+        @BindView(R.id.missingperson_before)
         ImageView before;
+        @BindView(R.id.missingperson_after)
         ImageView after;
+        @BindView(R.id.missingperson_namegenderage)
         TextView namegenderage;
+        @BindView(R.id.missingperson_like)
         ImageButton like;
+        @BindView(R.id.missingperson_birth)
         TextView birth;
+        @BindView(R.id.missingperson_address)
         TextView address;
+        @BindView(R.id.missingperson_aword)
         TextView aword;
 
         public ListHolder(View itemView) {
             super(itemView);
-            wrapper = (ConstraintLayout)itemView.findViewById(R.id.missingperson_wrapper);
-            before = (ImageView)itemView.findViewById(R.id.missingperson_before);
-            after = (ImageView)itemView.findViewById(R.id.missingperson_after);
-            namegenderage = (TextView)itemView.findViewById(R.id.missingperson_namegenderage);
-            like = (ImageButton)itemView.findViewById(R.id.missingperson_like);
-            birth = (TextView)itemView.findViewById(R.id.missingperson_birth);
-            address = (TextView)itemView.findViewById(R.id.missingperson_address);
-            aword = (TextView)itemView.findViewById(R.id.missingperson_aword);
+            ButterKnife.bind(this, itemView);
         }
     }
 }
