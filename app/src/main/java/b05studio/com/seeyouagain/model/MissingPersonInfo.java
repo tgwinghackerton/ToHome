@@ -23,10 +23,9 @@ public class MissingPersonInfo implements Serializable{
     private String physicalCharacteristics; // 신체특징
     private String dressMarks; // 옷
     private String etc; // 기타
+    private String writerKey;
 
-
-
-    public MissingPersonInfo(String beforeUrl, String afterUrl, String name, String gender, Calendar timeOfMissing, Calendar birth, String address, String aword, String circumstanceOfOccurance, String physicalCharacteristics, String dressMarks, String etc) {
+    public MissingPersonInfo(String beforeUrl, String afterUrl, String name, String gender, Calendar timeOfMissing, Calendar birth, String address, String aword, String circumstanceOfOccurance, String physicalCharacteristics, String dressMarks, String etc, String writerKey) {
         this.beforeUrl = beforeUrl;
         this.afterUrl = afterUrl;
         this.name = name;
@@ -38,7 +37,8 @@ public class MissingPersonInfo implements Serializable{
         this.circumstanceOfOccurance = circumstanceOfOccurance;
         this.physicalCharacteristics = physicalCharacteristics;
         this.dressMarks = dressMarks;
-        this. etc = etc;
+        this.etc = etc;
+        this.writerKey = writerKey;
     }
 
     public String getBeforeUrl() {
@@ -135,5 +135,13 @@ public class MissingPersonInfo implements Serializable{
 
     public void setEtc(String etc) {
         this.etc = etc;
+    }
+
+    public String getWriterKey() {
+        return writerKey;
+    }
+
+    public void setWriterKey(String writerKey) {
+        this.writerKey = writerKey;
     }
 }

@@ -47,11 +47,11 @@ public class MissingPersonListActivity extends AppCompatActivity {
         exampleInfos.put("1", new MissingPersonInfo("1", "1", "김성주", "남", Calendar.getInstance(), Calendar.getInstance(), "경기도 수원 영통동 중앙상가", "우리 아이 찾아주세요\n" +
                 "꼭 찾고 싶습니다!!", "학교 끝나고 집에 오는 길에 없어짐", "키 120cm, 쌍커풀, 이마에 희미한 흉터,\n" +
                 "동글넙적한 얼굴, 말이 좀 어눌함, 눈 밑에 꿰맨 자국", "흰색 티셔츠, 주황색 칠부바지, 하늘색 샌들", "고개를 끄덕이는 틱 장애가 있습니다.\n" +
-                "사례금 100만원.  "));
+                "사례금 100만원.  ", "1"));
         exampleInfos.put("2", new MissingPersonInfo("1", "1", "김성주", "남", Calendar.getInstance(), Calendar.getInstance(), "경기도 수원 영통동 중앙상가", "우리 아이 찾아주세요\n" +
                 "꼭 찾고 싶습니다!!", "학교 끝나고 집에 오는 길에 없어짐", "키 120cm, 쌍커풀, 이마에 희미한 흉터,\n" +
                 "동글넙적한 얼굴, 말이 좀 어눌함, 눈 밑에 꿰맨 자국", "흰색 티셔츠, 주황색 칠부바지, 하늘색 샌들", "고개를 끄덕이는 틱 장애가 있습니다.\n" +
-                "사례금 100만원.  "));
+                "사례금 100만원.  ", "1"));
          adapter.setMissingPersonInfos(exampleInfos);
         recyclerView.setAdapter(adapter);
         //updateMissingPersonInfos(adapter);
