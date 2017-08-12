@@ -1,16 +1,13 @@
 package b05studio.com.seeyouagain;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+public class RegisterThirdActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Intent intent2 = new Intent(this, LoginActivity.class);
-        startService(intent2);
+        setContentView(R.layout.activity_register_third);
     }
 }
