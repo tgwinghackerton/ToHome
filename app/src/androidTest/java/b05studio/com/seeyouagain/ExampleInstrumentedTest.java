@@ -1,4 +1,4 @@
-package b05studio.com.mpf;
+package b05studio.com.seeyouagain;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

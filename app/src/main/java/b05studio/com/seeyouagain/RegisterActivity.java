@@ -1,4 +1,4 @@
-package b05studio.com.mpf;
+package b05studio.com.seeyouagain;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -7,23 +7,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.text.format.DateFormat;
-import android.util.Base64;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Calendar;
-import java.util.Locale;
 
 import butterknife.BindView;
 

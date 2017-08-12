@@ -4,7 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
     defaultConfig {
-        applicationId "b05studio.com.mpf"
+        applicationId "b05studio.com.seeyouagain"
         minSdkVersion 19
         targetSdkVersion 25
         versionCode 1

@@ -1,14 +1,9 @@
-package b05studio.com.mpf;
+package b05studio.com.seeyouagain;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageButton;
 
 import butterknife.BindView;
 
@@ -16,20 +11,20 @@ import butterknife.BindView;
  * Created by mansu on 2017-07-05.
  */
 
-public class AlarmActivity extends AppCompatActivity {
-    @BindView(R.id.alarm_toolbar)
+public class InterestActivity extends AppCompatActivity {
+    @BindView(R.id.interest_toolbar)
     Toolbar toolbar;
 
-    @BindView(R.id.alarm_recyclerview)
+    @BindView(R.id.interest_recyclerview)
     RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_alarm);
+        setContentView(R.layout.activity_interest);
         setSupportActionBar(toolbar);
 
-        AlarmAdapter adapter = new AlarmAdapter(this);
+        InterestAdapter adapter = new InterestAdapter(this);
         recyclerView.setAdapter(adapter);
     }
 }

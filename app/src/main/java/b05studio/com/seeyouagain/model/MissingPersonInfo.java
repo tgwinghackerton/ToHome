@@ -1,4 +1,4 @@
-package b05studio.com.mpf.model;
+package b05studio.com.seeyouagain.model;
 
 import com.google.firebase.database.Exclude;
 
