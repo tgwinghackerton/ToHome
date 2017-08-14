@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -57,6 +58,8 @@ import butterknife.OnClick;
 public class ReportActivity extends DialogActivity {
     @BindView(R.id.report_content)
     EditText content;
+    @BindView(R.id.report_add_image)
+    ImageButton imageButton;
 
     private Bitmap bitmap;
     private final int SELECT_PICTURE = 1;
@@ -98,6 +101,8 @@ public class ReportActivity extends DialogActivity {
             if (requestCode == SELECT_PICTURE && data != null) {
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
+                    Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, imageButton.getWidth(), imageButton.getHeight(), true);
+                    imageButton.setImageBitmap(scaledBitmap);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
