@@ -84,7 +84,7 @@
                 android:layout_marginTop="49dp"
                 android:text="이름"
                 android:textSize="17sp"
-                android:textColor="#000000"
+                android:textColor="#87000000"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/register_check_aword"/>
             <TextView
@@ -94,7 +94,7 @@
                 android:layout_marginLeft="41dp"
                 android:layout_marginTop="77dp"
                 android:textSize="15sp"
-                android:textColor="#B3000000"
+                android:textColor="#000000"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/register_check_aword"/>
             <TextView
@@ -104,7 +104,7 @@
                 android:layout_marginTop="122dp"
                 android:text="성별"
                 android:textSize="17sp"
-                android:textColor="#000000"
+                android:textColor="#87000000"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/register_check_aword"/>
             <TextView
@@ -114,7 +114,7 @@
                 android:layout_marginLeft="41dp"
                 android:layout_marginTop="150dp"
                 android:textSize="15sp"
-                android:textColor="#B3000000"
+                android:textColor="#000000"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/register_check_aword"/>
             <TextView
@@ -124,7 +124,7 @@
                 android:layout_marginTop="195dp"
                 android:text="실종당시나이"
                 android:textSize="17sp"
-                android:textColor="#000000"
+                android:textColor="#87000000"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/register_check_aword"/>
             <TextView
@@ -134,7 +134,7 @@
                 android:layout_marginLeft="41dp"
                 android:layout_marginTop="223dp"
                 android:textSize="15sp"
-                android:textColor="#B3000000"
+                android:textColor="#000000"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/register_check_aword"/>
             <TextView
@@ -144,7 +144,7 @@
                 android:layout_marginTop="268dp"
                 android:text="실종일자"
                 android:textSize="17sp"
-                android:textColor="#000000"
+                android:textColor="#87000000"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/register_check_aword"/>
             <TextView
@@ -154,7 +154,7 @@
                 android:layout_marginLeft="41dp"
                 android:layout_marginTop="296dp"
                 android:textSize="15sp"
-                android:textColor="#B3000000"
+                android:textColor="#000000"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/register_check_aword"/>
             <View
@@ -172,7 +172,7 @@
                 android:layout_marginTop="370dp"
                 android:text="실종지역"
                 android:textSize="17sp"
-                android:textColor="#000000"
+                android:textColor="#87000000"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/register_check_aword"/>
             <TextView
@@ -182,7 +182,7 @@
                 android:layout_marginLeft="41dp"
                 android:layout_marginTop="398dp"
                 android:textSize="15sp"
-                android:textColor="#B3000000"
+                android:textColor="#000000"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/register_check_aword"/>
             <TextView
@@ -192,7 +192,7 @@
                 android:layout_marginTop="443dp"
                 android:text="발생경위"
                 android:textSize="17sp"
-                android:textColor="#000000"
+                android:textColor="#87000000"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/register_check_aword"/>
             <TextView
@@ -202,7 +202,7 @@
                 android:layout_marginLeft="41dp"
                 android:layout_marginTop="471dp"
                 android:textSize="15sp"
-                android:textColor="#B3000000"
+                android:textColor="#000000"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/register_check_aword"/>
             <View
@@ -220,7 +220,7 @@
                 android:layout_marginTop="545dp"
                 android:text="신체특징"
                 android:textSize="17sp"
-                android:textColor="#000000"
+                android:textColor="#87000000"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/register_check_aword"/>
             <TextView
@@ -230,7 +230,7 @@
                 android:layout_marginLeft="41dp"
                 android:layout_marginTop="573dp"
                 android:textSize="15sp"
-                android:textColor="#B3000000"
+                android:textColor="#000000"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/register_check_aword"/>
             <TextView
@@ -240,7 +240,7 @@
                 android:layout_marginTop="662dp"
                 android:text="착의사항"
                 android:textSize="17sp"
-                android:textColor="#000000"
+                android:textColor="#87000000"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/register_check_aword"/>
             <TextView
@@ -250,7 +250,7 @@
                 android:layout_marginLeft="41dp"
                 android:layout_marginTop="690dp"
                 android:textSize="15sp"
-                android:textColor="#B3000000"
+                android:textColor="#000000"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/register_check_aword"/>
             <View
@@ -268,7 +268,7 @@
                 android:layout_marginTop="764dp"
                 android:text="기타"
                 android:textSize="17sp"
-                android:textColor="#000000"
+                android:textColor="#87000000"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/register_check_aword"/>
             <TextView
@@ -278,7 +278,7 @@
                 android:layout_marginLeft="41dp"
                 android:layout_marginTop="792dp"
                 android:textSize="15sp"
-                android:textColor="#B3000000"
+                android:textColor="#000000"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/register_check_aword"/>
             </android.support.constraint.ConstraintLayout>

@@ -10,10 +10,12 @@ public class AlarmInfo {
     private String writerId;
     private String imageUrl;
     private String name;
-    private Calendar date;
+    private long date;
     private String content;
 
-    public AlarmInfo(String writerId, String imageUrl, String name, Calendar date, String content) {
+    public AlarmInfo() {}
+
+    public AlarmInfo(String writerId, String imageUrl, String name, long date, String content) {
         this.writerId = writerId;
         this.imageUrl = imageUrl;
         this.name = name;
@@ -37,11 +39,11 @@ public class AlarmInfo {
         this.name = name;
     }
 
-    public Calendar getDate() {
+    public long getDate() {
         return date;
     }
 
-    public void setDate(Calendar date) {
+    public void setDate(long date) {
         this.date = date;
     }
 

@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent">
     <android.support.v7.widget.Toolbar
-        android:id="@+id/list_toolbar"
+        android:id="@+id/register_toolbar"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:background="@color/colorPrimary"
@@ -26,45 +26,134 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ImageButton
-                android:id="@+id/list_menu"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/icon_hamburger"
+                android:id="@+id/register_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/icon_alarm_back"
+                android:background="@null"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
             <TextView
-                android:id="@+id/list_title"
+                android:id="@+id/register_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="순번대장_사장님"
-                android:textSize="20sp"
-                android:textColor="@color/colorPrimary"
+                android:text="등록"
+                android:textSize="18sp"
+                android:textColor="@android:color/white"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
-            <ImageButton
-                android:id="@+id/list_alarm"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/icon_alarm"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-            <ImageButton
-                android:id="@+id/list_search"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/icon_search"
-                app:layout_constraintRight_toLeftOf="@+id/list_alarm"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.Toolbar>
 
-    <ImageView
-        android:id="@+id/register_imageview"
-        android:layout_width="400dp"
-        android:layout_height="400dp" />
+    <ScrollView
+        android:id="@+id/register_scrollview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/register_toolbar"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true"
+            android:paddingBottom="42dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="실종자의 사진을 등록해주세요."
+                android:textSize="19sp"
+                android:textColor="#000000"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="69dp"
+                android:text="얼굴에 딱 맞는 형태로 사각형을 그려주세요."
+                android:textColor="#A6000000"
+                android:textSize="15sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageView
+                android:id="@+id/register_imageview"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_marginTop="110dp"
+                android:background="@drawable/imageview_register_image"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <b05studio.com.seeyouagain.TouchView
+                android:id="@+id/register_touchview"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:layout_constraintLeft_toLeftOf="@+id/register_imageview"
+                app:layout_constraintRight_toRightOf="@+id/register_imageview"
+                app:layout_constraintTop_toTopOf="@+id/register_imageview"
+                app:layout_constraintBottom_toBottomOf="@+id/register_imageview"/>
+
+            <View
+                android:id="@+id/register_divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="23dp"
+                android:background="#4A000000"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/register_imageview"/>
+            <TextView
+                android:id="@+id/register_aword_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:text="사람들에게 전달할 메시지를 입력해주세요."
+                android:textSize="19sp"
+                android:textColor="#000000"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/register_divider"/>
+            <EditText
+                android:id="@+id/register_aword"
+                android:layout_width="246dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="19dp"
+                android:paddingLeft="10dp"
+                android:gravity="left|center_vertical"
+                android:hint="ex) 소중한 아이입니다. 도와주세요!"
+                android:textColorHint="#A6000000"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                android:background="@drawable/edittext_register_aword"
+                android:inputType="text"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/register_aword_text"/>
+
+            <ImageButton
+                android:id="@+id/registerNextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/register_aword"
+                android:layout_marginTop="23dp"
+                android:layout_marginRight="21dp"
+                android:background="@null"
+                android:src="@drawable/ic_next_button" />
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>

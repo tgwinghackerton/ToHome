@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.google.firebase.database.FirebaseDatabase;
 
+import b05studio.com.seeyouagain.fcm.FCMWebServerConnector;
 import b05studio.com.seeyouagain.model.User;
 
 public class MainActivity extends AppCompatActivity {
@@ -14,11 +15,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        FCMWebServerConnector.setPushServerURL("http://" + getString(R.string.PUSH_SERVER_IP) + "/SYAPushServer.php");
+
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
-    }
-
-    public void createTempUser() {
     }
 }

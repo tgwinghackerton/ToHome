@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 import b05studio.com.seeyouagain.model.AlarmInfo;
+import b05studio.com.seeyouagain.model.User;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -34,39 +35,12 @@ public class AlarmActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         AlarmAdapter adapter = new AlarmAdapter(this);
-        HashMap<String,AlarmInfo> infos = new HashMap<>();
-        infos.put("1", new AlarmInfo("1", "1", "최재열", Calendar.getInstance(), "제가 오늘 학교앞에서 비슷한 아이를 발견했습니다. 사진 첨부해드립니다."));
-        infos.put("2", new AlarmInfo("1", "1", "최재열", Calendar.getInstance(), "제가 오늘 학교앞에서 비슷한 아이를 발견했습니다. 사진 첨부해드립니다."));
-        adapter.setAlarmInfos(infos);
+        adapter.setAlarmInfos(User.getUserInstance().getAlarmInfos());
         recyclerView.setAdapter(adapter);
     }
 
     @OnClick(R.id.alarm_back)
     void backClick(View view) {
         finish();
-    }
-
-    public void updateAlarmInfos(final AlarmAdapter adapter) {
-        /*
-        Query query = FirebaseDatabase.getInstance().getReference().child("mpi").
-        FirebaseDatabase.getInstance().getReference().child("mpi").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                HashMap<String, AlarmInfo> alarmInfos = (HashMap<String, AlarmInfo>)dataSnapshot.getValue();
-                adapter.setAlarmInfos(alarmInfos);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        adapter.notifyDataSetChanged();
-                    }
-                });
-            }
-`
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                //TODO 2017-08-10: 실패했을때 메시지 어떻게 띄울것인지
-            }
-        });
-        */
     }
 }

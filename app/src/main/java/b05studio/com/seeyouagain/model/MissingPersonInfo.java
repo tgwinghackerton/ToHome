@@ -30,10 +30,11 @@ public class MissingPersonInfo implements Serializable {
     private String dressMarks; // 옷
     private String etc; // 기타
     private String writerKey;
+    private boolean accepted;
 
     public MissingPersonInfo() {}
 
-    public MissingPersonInfo(String beforeUrl, String afterUrl, String name, String gender, long timeOfMissing, int age, String address, String aword, String circumstanceOfOccurance, String physicalCharacteristics, String dressMarks, String etc, String writerKey) {
+    public MissingPersonInfo(String beforeUrl, String afterUrl, String name, String gender, long timeOfMissing, int age, String address, String aword, String circumstanceOfOccurance, String physicalCharacteristics, String dressMarks, String etc, String writerKey, boolean accepted) {
         this.beforeUrl = beforeUrl;
         this.afterUrl = afterUrl;
         this.name = name;
@@ -47,6 +48,7 @@ public class MissingPersonInfo implements Serializable {
         this.dressMarks = dressMarks;
         this.etc = etc;
         this.writerKey = writerKey;
+        this.accepted = accepted;
     }
 
     public String getBeforeUrl() {
@@ -151,5 +153,13 @@ public class MissingPersonInfo implements Serializable {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public boolean isAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(boolean accepted) {
+        this.accepted = accepted;
     }
 }

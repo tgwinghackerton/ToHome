@@ -49,7 +49,6 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmHolder>
     @Override
     public void onBindViewHolder(AlarmHolder holder, int position) {
         final AlarmInfo info = alarmInfos.get((alarmInfos.keySet().toArray())[position]);
-        final String key = (String)(alarmInfos.keySet().toArray())[position];
 
         holder.wrapper.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,10 +56,11 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmHolder>
                 //Intent intent = new Intent(context, )
             }
         });
-        Picasso.with(context).load(info.getImageUrl()).into(holder.image);
+        if(info.getImageUrl() != null && info.getImageUrl().compareTo("") != 0)
+            Picasso.with(context).load(info.getImageUrl()).into(holder.image);
         holder.name.setText(info.getName());
         SimpleDateFormat format = new SimpleDateFormat("a hh:mm");
-        holder.date.setText(Utils.getDateString(info.getDate().getTimeInMillis()) + " " + format.format(info.getDate().getTime()));
+        holder.date.setText(Utils.getDateString(info.getDate()) + " " + format.format(info.getDate()));
         holder.content.setText(info.getContent());
     }
 

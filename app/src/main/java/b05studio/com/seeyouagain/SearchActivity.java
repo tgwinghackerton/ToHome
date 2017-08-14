@@ -15,6 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import b05studio.com.seeyouagain.model.MissingPersonInfo;
 import butterknife.BindView;
@@ -36,6 +37,7 @@ public class SearchActivity extends AppCompatActivity {
     @BindView(R.id.search_recyclerview)
     RecyclerView recyclerView;
 
+    private MissingPersonListAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +45,7 @@ public class SearchActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
-        MissingPersonListAdapter adapter = new MissingPersonListAdapter(this);
+        adapter = new MissingPersonListAdapter(this);
         recyclerView.setAdapter(adapter);
         //updateSearchInfo(adapter);
     }
@@ -63,6 +65,7 @@ public class SearchActivity extends AppCompatActivity {
         switch (actionId) {
             case EditorInfo.IME_ACTION_SEARCH:
                 String queryString = searchText.getText().toString();
+                getSearchInfo(adapter, queryString);
                 break;
             default:
                 return false;
@@ -70,11 +73,18 @@ public class SearchActivity extends AppCompatActivity {
         return true;
     }
 
-    public void updateSearchInfo(final MissingPersonListAdapter adapter) {
+    public void getSearchInfo(final MissingPersonListAdapter adapter, final String searchText) {
         FirebaseDatabase.getInstance().getReference().child("mpi").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                HashMap<String, MissingPersonInfo> missingPersonInfos = (HashMap<String, MissingPersonInfo>)dataSnapshot.getValue();
+                Map<String, MissingPersonInfo> missingPersonInfos = new HashMap<String, MissingPersonInfo>();//HashMap<String, MissingPersonInfo>)dataSnapshot.getValue(); <- 이렇게해서 그냥 adapter set하면안된다??
+                //getValue로 클래스 지정안해주면 맵으로받아올때 그 클래스인지몰라서 변경안시켜줘서 문제생긴다든데?
+                for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    MissingPersonInfo info = dataSnapshot1.getValue(MissingPersonInfo.class);
+                    if(info.getName().indexOf(searchText) != -1 && info.isAccepted())
+                        missingPersonInfos.put(dataSnapshot1.getKey(), info);
+                }
+
                 adapter.setMissingPersonInfos(missingPersonInfos);
                 runOnUiThread(new Runnable() {
                     @Override

@@ -42,10 +42,10 @@ public class MissingPersonListActivity extends AppCompatActivity {
         HashMap<String, MissingPersonInfo> exampleInfos = new HashMap<>();
          adapter.setMissingPersonInfos(exampleInfos);
         recyclerView.setAdapter(adapter);
-        updateMissingPersonInfos(adapter);
+        getMissingPersonInfos(adapter);
     }
 
-    public void updateMissingPersonInfos(final MissingPersonListAdapter adapter) {
+    public void getMissingPersonInfos(final MissingPersonListAdapter adapter) {
         FirebaseDatabase.getInstance().getReference().child("mpi").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -53,7 +53,8 @@ public class MissingPersonListActivity extends AppCompatActivity {
                 //getValue로 클래스 지정안해주면 맵으로받아올때 그 클래스인지몰라서 변경안시켜줘서 문제생긴다든데?
                 for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     MissingPersonInfo info = dataSnapshot1.getValue(MissingPersonInfo.class);
-                    missingPersonInfos.put(dataSnapshot1.getKey(), info);
+                    if(info.isAccepted())
+                        missingPersonInfos.put(dataSnapshot1.getKey(), info);
                 }
                 adapter.setMissingPersonInfos(missingPersonInfos);
                 runOnUiThread(new Runnable() {
@@ -85,7 +86,7 @@ public class MissingPersonListActivity extends AppCompatActivity {
 
     @OnClick(R.id.list_fab)
     public void fabClick(View view) {
-        Intent intent = new Intent(MissingPersonListActivity.this, RegisterFirstActivity.class);
+        Intent intent = new Intent(MissingPersonListActivity.this, RegisterActivity.class);
         startActivity(intent);
     }
 

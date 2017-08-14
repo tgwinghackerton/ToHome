@@ -17,6 +17,7 @@ public class User {
     private String phoneNumber;
     private String token;
     private List<String> userLikeList = new ArrayList<>();
+    private List<MissingPersonInfo> infoList = new ArrayList<>();
     private HashMap<String, AlarmInfo> alarmInfos = new HashMap<>();
 
     @Exclude
@@ -84,5 +85,13 @@ public class User {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public List<MissingPersonInfo> getInfoList() {
+        return infoList;
+    }
+
+    public void setInfoList(List<MissingPersonInfo> infoList) {
+        this.infoList = infoList;
     }
 }
