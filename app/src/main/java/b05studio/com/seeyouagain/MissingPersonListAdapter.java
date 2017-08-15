@@ -1,7 +1,10 @@
 package b05studio.com.seeyouagain;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.Image;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,10 +19,12 @@ import com.squareup.picasso.Picasso;
 import java.text.SimpleDateFormat;
 import java.util.Map;
 
+import b05studio.com.seeyouagain.leaflet.Leaflet;
 import b05studio.com.seeyouagain.listener.EmptyListener;
 import b05studio.com.seeyouagain.listener.FullListener;
 import b05studio.com.seeyouagain.model.MissingPersonInfo;
 import b05studio.com.seeyouagain.model.User;
+import b05studio.com.seeyouagain.sns.Facebook;
 import b05studio.com.seeyouagain.util.Utils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -80,6 +85,14 @@ public class MissingPersonListAdapter extends RecyclerView.Adapter<MissingPerson
             holder.like.setImageResource(R.drawable.icon_heart_empty);
             holder.like.setOnClickListener(new EmptyListener(context, holder.like, key));
         }
+        holder.facebookShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Leaflet leaflet = new Leaflet((Activity)context, info);
+                Bitmap leafletBitmap = leaflet.infoToLeafletBitmap();
+                Facebook.shareFacebook((Activity)context, leafletBitmap);
+            }
+        });
     }
 
     @Override
@@ -107,6 +120,8 @@ public class MissingPersonListAdapter extends RecyclerView.Adapter<MissingPerson
         TextView address;
         @BindView(R.id.missingperson_aword)
         TextView aword;
+        @BindView(R.id.missingperson_facebook_share)
+        ImageButton facebookShare;
 
         public ListHolder(View itemView) {
             super(itemView);

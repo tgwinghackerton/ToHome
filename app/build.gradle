@@ -45,6 +45,7 @@ dependencies {
 
     //https://github.com/jdamcd/android-crop
     compile 'com.soundcloud.android:android-crop:1.0.1@aar'
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
 
     testCompile 'junit:junit:4.12'
 }
