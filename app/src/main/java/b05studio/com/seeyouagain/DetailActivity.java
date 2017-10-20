@@ -1,6 +1,8 @@
 package b05studio.com.seeyouagain;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,10 +15,12 @@ import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 
+import b05studio.com.seeyouagain.leaflet.Leaflet;
 import b05studio.com.seeyouagain.listener.EmptyListener;
 import b05studio.com.seeyouagain.listener.FullListener;
 import b05studio.com.seeyouagain.model.MissingPersonInfo;
 import b05studio.com.seeyouagain.model.User;
+import b05studio.com.seeyouagain.sns.Facebook;
 import b05studio.com.seeyouagain.util.Utils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -98,5 +102,12 @@ public class DetailActivity extends AppCompatActivity {
         intent.putExtra("info", info);
         intent.putExtra("key", key);
         startActivity(intent);
+    }
+
+    @OnClick(R.id.detail_share)
+    public void shareClick(View view) {
+        Leaflet leaflet = new Leaflet(this, info);
+        Bitmap leafletBitmap = leaflet.infoToLeafletBitmap();
+        Facebook.shareFacebook(this, leafletBitmap);
     }
 }

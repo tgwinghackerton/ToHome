@@ -81,14 +81,14 @@ public class FCMMessagingService extends FirebaseMessagingService {
             if(isAppOnForeground(getApplicationContext()))
                 intent = new Intent(this, AlarmActivity.class);
             else
-                intent = new Intent(this, LoginActivity.class);
+                intent = new Intent(this, AlarmActivity.class);
 
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | intent.FLAG_ACTIVITY_SINGLE_TOP);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                     PendingIntent.FLAG_ONE_SHOT);
             Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                    .setSmallIcon(R.drawable.icon_alarm)
+                    .setSmallIcon(R.drawable.icon_alarm_test)
                     .setContentTitle(jsonObj.getString("name") + "님이 메시지를 보내셨습니다.")
                     .setContentText(jsonObj.getString("content"))
                     .setAutoCancel(true)
@@ -96,7 +96,7 @@ public class FCMMessagingService extends FirebaseMessagingService {
                     .setContentIntent(pendingIntent);
             Notification n = notificationBuilder.build();
             NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            notificationManager.notify(jsonObj.getString("alarmID"), NOTIFICATION_ID /* ID of notification */, n);
+            notificationManager.notify(null, NOTIFICATION_ID /* ID of notification */, n);
         } catch (JSONException e) {
             e.printStackTrace();
         }

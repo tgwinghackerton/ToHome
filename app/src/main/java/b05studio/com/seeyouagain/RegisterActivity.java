@@ -83,8 +83,10 @@ public class RegisterActivity extends AppCompatActivity {
         String aword = awordEditText.getText().toString();
 
         if (aword.length() > 0) {
-            TouchView.Coord coord = touchView.getCoord();
-            cropBitmap = Bitmap.createBitmap(scaledBitmap, (int)coord.prex, (int)coord.prey, (int)(coord.postx - coord.prex), (int)(coord.posty - coord.prey));
+            if(scaledBitmap != null) {
+                TouchView.Coord coord = touchView.getCoord();
+                cropBitmap = Bitmap.createBitmap(scaledBitmap, (int) coord.prex, (int) coord.prey, (int) (coord.postx - coord.prex), (int) (coord.posty - coord.prey));
+            }
             //System.out.println("decode jpeg data");
             RegisterActivity.info.setAword(aword);
             Intent intent = new Intent(this,RegisterFirstActivity.class);

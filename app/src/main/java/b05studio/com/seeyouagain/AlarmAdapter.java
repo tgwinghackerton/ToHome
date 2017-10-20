@@ -29,13 +29,13 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmHolder>
 
     private Context context;
 
-    private HashMap<String, AlarmInfo> alarmInfos;
+    private List<AlarmInfo> alarmInfos;
 
     public AlarmAdapter(Context context) {
         this.context = context;
     }
 
-    public void setAlarmInfos(HashMap<String, AlarmInfo> alarmInfos) {
+    public void setAlarmInfos(List<AlarmInfo> alarmInfos) {
         this.alarmInfos = alarmInfos;
     }
 
@@ -48,7 +48,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.AlarmHolder>
 
     @Override
     public void onBindViewHolder(AlarmHolder holder, int position) {
-        final AlarmInfo info = alarmInfos.get((alarmInfos.keySet().toArray())[position]);
+        final AlarmInfo info = alarmInfos.get(position);
 
         holder.wrapper.setOnClickListener(new View.OnClickListener() {
             @Override

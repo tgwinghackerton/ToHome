@@ -66,6 +66,8 @@
                 android:singleLine="true"
                 android:hint="검색을 하실려면 입력해주세요."
                 android:textColorHint="#66000000"
+                android:inputType="text"
+                android:imeOptions="actionDone"
                 android:background="@android:color/transparent"
                 app:layout_constraintLeft_toRightOf="@+id/search_icon"
                 app:layout_constraintTop_toTopOf="@+id/search_wrapper"

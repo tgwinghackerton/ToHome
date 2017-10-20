@@ -27,19 +27,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service
-            android:name="b05studio.com.seeyouagain.fcm.FCMInstanceIDService">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
-            </intent-filter>
-        </service>
-
-        <service
-            android:name="b05studio.com.seeyouagain.fcm.FCMMessagingService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-            </intent-filter>
-        </service>
 
         <activity android:name=".LoginActivity" android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="b05studio.com.seeyouagain.MissingPersonListActivity" android:theme="@style/AppTheme.NoActionBar" />
@@ -54,6 +41,22 @@
         <activity android:name="b05studio.com.seeyouagain.RegisterThirdActivity" android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name="b05studio.com.seeyouagain.RegisterFourthActivity" android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name="b05studio.com.seeyouagain.RegisterCheckActivity" android:theme="@style/AppTheme.NoActionBar"/>
+
+        <service
+            android:name="b05studio.com.seeyouagain.fcm.FCMInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <service
+            android:name="b05studio.com.seeyouagain.fcm.FCMMessagingService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

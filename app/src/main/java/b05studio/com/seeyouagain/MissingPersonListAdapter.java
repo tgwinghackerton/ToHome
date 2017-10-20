@@ -85,14 +85,6 @@ public class MissingPersonListAdapter extends RecyclerView.Adapter<MissingPerson
             holder.like.setImageResource(R.drawable.icon_heart_empty);
             holder.like.setOnClickListener(new EmptyListener(context, holder.like, key));
         }
-        holder.facebookShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Leaflet leaflet = new Leaflet((Activity)context, info);
-                Bitmap leafletBitmap = leaflet.infoToLeafletBitmap();
-                Facebook.shareFacebook((Activity)context, leafletBitmap);
-            }
-        });
     }
 
     @Override
@@ -120,8 +112,6 @@ public class MissingPersonListAdapter extends RecyclerView.Adapter<MissingPerson
         TextView address;
         @BindView(R.id.missingperson_aword)
         TextView aword;
-        @BindView(R.id.missingperson_facebook_share)
-        ImageButton facebookShare;
 
         public ListHolder(View itemView) {
             super(itemView);
