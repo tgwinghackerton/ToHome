@@ -1,11 +1,17 @@
 package b05studio.com.seeyouagain;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,8 +34,11 @@ public class MissingPersonListActivity extends AppCompatActivity {
     @BindView(R.id.list_toolbar)
     Toolbar toolbar;
 
-    @BindView(R.id.list_recyclerview)
-    RecyclerView recyclerView;
+    @BindView(R.id.list_tab)
+    TabLayout tabLayout;
+
+    @BindView(R.id.list_viewpager)
+    ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,36 +47,37 @@ public class MissingPersonListActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
-        MissingPersonListAdapter adapter = new MissingPersonListAdapter(this);
-        HashMap<String, MissingPersonInfo> exampleInfos = new HashMap<>();
-         adapter.setMissingPersonInfos(exampleInfos);
-        recyclerView.setAdapter(adapter);
-        getMissingPersonInfos(adapter);
-    }
+        tabLayout.addTab(tabLayout.newTab().setText("See You Again"));
+        tabLayout.addTab(tabLayout.newTab().setText("초록우산"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        tabLayout.setTabTextColors(0xFFFFFFFF, 0xFFFFFFFF);
+        LinearLayout layout = (LinearLayout)((ViewGroup) tabLayout.getChildAt(0)).getChildAt(tabLayout.getTabAt(0).getPosition());
+        TextView tabTextView = (TextView) layout.getChildAt(1);
+        tabTextView.setTypeface(tabTextView.getTypeface(), Typeface.BOLD);
 
-    public void getMissingPersonInfos(final MissingPersonListAdapter adapter) {
-        FirebaseDatabase.getInstance().getReference().child("mpi").addListenerForSingleValueEvent(new ValueEventListener() {
+        MissingPersonListAdapter adapter = new MissingPersonListAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Map<String, MissingPersonInfo> missingPersonInfos = new HashMap<String, MissingPersonInfo>();//HashMap<String, MissingPersonInfo>)dataSnapshot.getValue(); <- 이렇게해서 그냥 adapter set하면안된다??
-                //getValue로 클래스 지정안해주면 맵으로받아올때 그 클래스인지몰라서 변경안시켜줘서 문제생긴다든데?
-                for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    MissingPersonInfo info = dataSnapshot1.getValue(MissingPersonInfo.class);
-                    if(info.isAccepted())
-                        missingPersonInfos.put(dataSnapshot1.getKey(), info);
-                }
-                adapter.setMissingPersonInfos(missingPersonInfos);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        adapter.notifyDataSetChanged();
-                    }
-                });
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+
+                LinearLayout layout = (LinearLayout)((ViewGroup) tabLayout.getChildAt(0)).getChildAt(tab.getPosition());
+                TextView tabTextView = (TextView) layout.getChildAt(1);
+                tabTextView.setTypeface(tabTextView.getTypeface(), Typeface.BOLD);
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-                //TODO 2017-08-10: 실패했을때 메시지 어떻게 띄울것인지
+            public void onTabUnselected(TabLayout.Tab tab) {
+                LinearLayout layout = (LinearLayout)((ViewGroup) tabLayout.getChildAt(0)).getChildAt(tab.getPosition());
+                TextView tabTextView = (TextView) layout.getChildAt(1);
+                tabTextView.setTypeface(tabTextView.getTypeface(), Typeface.NORMAL);
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
             }
         });
     }
@@ -81,12 +91,6 @@ public class MissingPersonListActivity extends AppCompatActivity {
     @OnClick(R.id.list_search)
     public void searchClick(View view) {
         Intent intent = new Intent(MissingPersonListActivity.this, SearchActivity.class);
-        startActivity(intent);
-    }
-
-    @OnClick(R.id.list_fab)
-    public void fabClick(View view) {
-        Intent intent = new Intent(MissingPersonListActivity.this, RegisterActivity.class);
         startActivity(intent);
     }
 

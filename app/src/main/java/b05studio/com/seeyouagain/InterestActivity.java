@@ -11,10 +11,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import b05studio.com.seeyouagain.model.GreenUmInfo;
+import b05studio.com.seeyouagain.model.InterestInfo;
+import b05studio.com.seeyouagain.model.LikeInfo;
 import b05studio.com.seeyouagain.model.MissingPersonInfo;
 import b05studio.com.seeyouagain.model.User;
 import butterknife.BindView;
@@ -46,46 +49,83 @@ public class InterestActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         count = 0;
-        MissingPersonListAdapter adapter = new MissingPersonListAdapter(this);
+        InterestAdapter adapter = new InterestAdapter(this);
         recyclerView.setAdapter(adapter);
         getInterestInfos(adapter);
     }
 
-    public void getInterestInfos(final MissingPersonListAdapter adapter) {
-        final List<String> likeList = User.getUserInstance().getUserLikeList();
-        final HashMap<String, MissingPersonInfo> infos = new HashMap<>();
+    public void getInterestInfos(final InterestAdapter adapter) {
+        final List<LikeInfo> likeList = User.getUserInstance().getUserLikeList();
+        final HashMap<LikeInfo, InterestInfo> infos = new HashMap<>();
         for(int i=0; i<likeList.size(); i++) {
-            FirebaseDatabase.getInstance().getReference().child("mpi").child(likeList.get(i)).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    infos.put(dataSnapshot.getKey(), dataSnapshot.getValue(MissingPersonInfo.class));
-                    count++;
-                    if(count == likeList.size()) {
-                        adapter.setMissingPersonInfos(infos);
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                adapter.notifyDataSetChanged();
-                            }
-                        });
+            final LikeInfo likeInfo = likeList.get(i);
+            String type = (likeInfo.getType() == 0) ? "mpi" : "missingChilds";
+            if(likeInfo.getType() == 0) {
+                FirebaseDatabase.getInstance().getReference().child("mpi").child(likeInfo.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        infos.put(likeInfo, new InterestInfo(null, dataSnapshot.getValue(MissingPersonInfo.class)));
+                        count++;
+                        if (count == likeList.size()) {
+                            adapter.setInterestInfos(infos);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    adapter.notifyDataSetChanged();
+                                }
+                            });
+                        }
                     }
-                }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    //TODO 2017-08-10: 실패했을때 메시지 어떻게 띄울것인지
-                    count++;
-                    if(count == likeList.size()) {
-                        adapter.setMissingPersonInfos(infos);
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                adapter.notifyDataSetChanged();
-                            }
-                        });
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        //TODO 2017-08-10: 실패했을때 메시지 어떻게 띄울것인지
+                        count++;
+                        if (count == likeList.size()) {
+                            adapter.setInterestInfos(infos);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    adapter.notifyDataSetChanged();
+                                }
+                            });
+                        }
                     }
-                }
-            });
+                });
+            }
+            else {
+                FirebaseDatabase.getInstance().getReference().child("missingChilds").child(likeInfo.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        infos.put(likeInfo, new InterestInfo(dataSnapshot.getValue(GreenUmInfo.class), null));
+                        count++;
+                        if (count == likeList.size()) {
+                            adapter.setInterestInfos(infos);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    adapter.notifyDataSetChanged();
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        //TODO 2017-08-10: 실패했을때 메시지 어떻게 띄울것인지
+                        count++;
+                        if (count == likeList.size()) {
+                            adapter.setInterestInfos(infos);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    adapter.notifyDataSetChanged();
+                                }
+                            });
+                        }
+                    }
+                });
+            }
         }
     }
 }

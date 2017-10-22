@@ -67,7 +67,7 @@
                 android:hint="검색을 하실려면 입력해주세요."
                 android:textColorHint="#66000000"
                 android:inputType="text"
-                android:imeOptions="actionDone"
+                android:imeOptions="actionSearch"
                 android:background="@android:color/transparent"
                 app:layout_constraintLeft_toRightOf="@+id/search_icon"
                 app:layout_constraintTop_toTopOf="@+id/search_wrapper"
@@ -89,9 +89,10 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/search_recyclerview"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
+        android:layout_height="0dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_toolbar"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
 </android.support.constraint.ConstraintLayout>

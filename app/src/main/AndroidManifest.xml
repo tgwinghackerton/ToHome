@@ -31,6 +31,7 @@
         <activity android:name=".LoginActivity" android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="b05studio.com.seeyouagain.MissingPersonListActivity" android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="b05studio.com.seeyouagain.DetailActivity" android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="b05studio.com.seeyouagain.GreenUmDetailActivity" android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="b05studio.com.seeyouagain.ReportActivity" android:theme="@style/AppTheme.NoActionBar" android:windowSoftInputMode="adjustResize"/>
         <activity android:name="b05studio.com.seeyouagain.InterestActivity" android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="b05studio.com.seeyouagain.SearchActivity" android:theme="@style/AppTheme.NoActionBar" />

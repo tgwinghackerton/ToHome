@@ -6,23 +6,45 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.Icon;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
+import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.Request;
+import com.bumptech.glide.request.target.SizeReadyCallback;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import b05studio.com.seeyouagain.AlarmActivity;
 import b05studio.com.seeyouagain.AlarmAdapter;
+import b05studio.com.seeyouagain.DetailActivity;
+import b05studio.com.seeyouagain.GreenUmDetailActivity;
 import b05studio.com.seeyouagain.LoginActivity;
 import b05studio.com.seeyouagain.R;
+import b05studio.com.seeyouagain.model.GreenUmInfo;
+import b05studio.com.seeyouagain.model.MissingPersonInfo;
+import b05studio.com.seeyouagain.util.Utils;
 
 /**
  * Created by mansu on 2017-08-14.
@@ -76,30 +98,86 @@ public class FCMMessagingService extends FirebaseMessagingService {
     private void sendNotification(String messageBody) {
         try {
             JSONObject jsonObj = new JSONObject(messageBody);
+            boolean check = false;
+            try {
+                jsonObj.getString("beforeUrl");
+                check = true;
+            } catch(JSONException e) {
+                check = false;
+            }
+            if (check) {
+                Intent intent;
+                if (isAppOnForeground(getApplicationContext()))
+                    intent = new Intent(this, GreenUmDetailActivity.class);
+                else
+                    intent = new Intent(this, GreenUmDetailActivity.class);
+                final GreenUmInfo greenUmInfo = new GreenUmInfo();
+                greenUmInfo.setAddress(jsonObj.getString("address"));
+                greenUmInfo.setAge(jsonObj.getString("age"));
+                greenUmInfo.setBeforeUrl(jsonObj.getString("beforeUrl"));
+                greenUmInfo.setGender(jsonObj.getString("gender"));
+                greenUmInfo.setName(jsonObj.getString("name"));
+                greenUmInfo.setPhysicalCharacteristics(jsonObj.getString("physicalCharacteristics"));
+                greenUmInfo.setTimeOfMissing(jsonObj.getString("timeOfMissing"));
+                intent.putExtra("info", greenUmInfo);
+                intent.putExtra("key", jsonObj.getString("key"));
 
-            Intent intent;
-            if(isAppOnForeground(getApplicationContext()))
-                intent = new Intent(this, AlarmActivity.class);
-            else
-                intent = new Intent(this, AlarmActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | intent.FLAG_ACTIVITY_SINGLE_TOP);
+                final PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+                        PendingIntent.FLAG_ONE_SHOT);
+                final Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | intent.FLAG_ACTIVITY_SINGLE_TOP);
-            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                    PendingIntent.FLAG_ONE_SHOT);
-            Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                    .setSmallIcon(R.drawable.icon_alarm_test)
-                    .setContentTitle(jsonObj.getString("name") + "님이 메시지를 보내셨습니다.")
-                    .setContentText(jsonObj.getString("content"))
-                    .setAutoCancel(true)
-                    .setSound(defaultSoundUri)
-                    .setContentIntent(pendingIntent);
-            Notification n = notificationBuilder.build();
-            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            notificationManager.notify(null, NOTIFICATION_ID /* ID of notification */, n);
-        } catch (JSONException e) {
+                Bitmap bitmap = null;
+                try {
+                    bitmap = Glide.with(getApplicationContext()).load(greenUmInfo.getBeforeUrl()).asBitmap().into(100, 100).get();
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일");
+                    try {
+                        Date date = format.parse(greenUmInfo.getTimeOfMissing());
+                        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(FCMMessagingService.this)
+                                .setSmallIcon(R.drawable.icon_alarm_test)
+                                .setLargeIcon(bitmap)
+                                .setContentTitle(greenUmInfo.getName() + " (" + greenUmInfo.getGender() + ", 현재 " + Utils.getAge(date.getTime(), Integer.parseInt(greenUmInfo.getAge())) + "세)")
+                                .setContentText("주소 : " + greenUmInfo.getAddress() + ", 신체특징 : " + greenUmInfo.getPhysicalCharacteristics())
+                                .setAutoCancel(true)
+                                .setSound(defaultSoundUri)
+                                .setContentIntent(pendingIntent);
+                        Notification n = notificationBuilder.build();
+                        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                        notificationManager.notify(null, NOTIFICATION_ID /* ID of notification */, n);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Intent intent;
+                if (isAppOnForeground(getApplicationContext()))
+                    intent = new Intent(this, AlarmActivity.class);
+                else
+                    intent = new Intent(this, AlarmActivity.class);
+
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | intent.FLAG_ACTIVITY_SINGLE_TOP);
+                PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+                        PendingIntent.FLAG_ONE_SHOT);
+                Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.icon_alarm_test)
+                        .setContentTitle(jsonObj.getString("name") + "님이 메시지를 보내셨습니다.")
+                        .setContentText(jsonObj.getString("content"))
+                        .setAutoCancel(true)
+                        .setSound(defaultSoundUri)
+                        .setContentIntent(pendingIntent);
+                Notification n = notificationBuilder.build();
+                NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager.notify(null, NOTIFICATION_ID /* ID of notification */, n);
+            }
+        } catch(JSONException e){
             e.printStackTrace();
         }
+
     }
 
     private boolean isAppOnForeground(Context context) {

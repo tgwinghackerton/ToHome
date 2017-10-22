@@ -6,11 +6,6 @@ package b05studio.com.seeyouagain.model;
 
 import java.io.Serializable;
 
-        import com.google.firebase.database.Exclude;
-
-        import java.io.Serializable;
-        import java.util.Calendar;
-
 /**
  * Created by mansu on 2017-07-05.
  */

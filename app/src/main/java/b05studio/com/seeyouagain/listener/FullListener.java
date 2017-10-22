@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import b05studio.com.seeyouagain.R;
+import b05studio.com.seeyouagain.model.LikeInfo;
 import b05studio.com.seeyouagain.model.User;
 import b05studio.com.seeyouagain.util.Utils;
 
@@ -25,18 +26,20 @@ import b05studio.com.seeyouagain.util.Utils;
 public class FullListener implements View.OnClickListener {
     private Context context;
     private ImageButton like;
+    private int type;
     private String key;
 
-    public FullListener(Context context, ImageButton like, String key) {
+    public FullListener(Context context, ImageButton like, int type, String key) {
         this.context = context;
         this.like = like;
+        this.type = type;
         this.key = key;
     }
 
     @Override
     public void onClick(final View view) {
-        final List<String> userLikeList = (List<String>)((ArrayList)User.getUserInstance().getUserLikeList()).clone();
-        userLikeList.remove(key);
+        final List<LikeInfo> userLikeList = (List<LikeInfo>)((ArrayList)User.getUserInstance().getUserLikeList()).clone();
+        userLikeList.remove(new LikeInfo(type, key));
         FirebaseDatabase.getInstance().getReference().child("user")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .child("userLikeList").setValue(userLikeList, new DatabaseReference.CompletionListener() {
@@ -51,7 +54,7 @@ public class FullListener implements View.OnClickListener {
                         else {
                             User.getUserInstance().setUserLikeList(userLikeList);
                             like.setImageResource(R.drawable.icon_heart_empty);
-                            view.setOnClickListener(new EmptyListener(context, like, key));
+                            view.setOnClickListener(new EmptyListener(context, like, type, key));
                         }
                     }
                 });

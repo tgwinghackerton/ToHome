@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import b05studio.com.seeyouagain.R;
+import b05studio.com.seeyouagain.model.LikeInfo;
 import b05studio.com.seeyouagain.model.User;
 
 /**
@@ -24,11 +25,13 @@ import b05studio.com.seeyouagain.model.User;
 public class EmptyListener implements View.OnClickListener {
     private Context context;
     private ImageButton like;
+    private int type;
     private String key;
 
-    public EmptyListener(Context context, ImageButton like, String key) {
+    public EmptyListener(Context context, ImageButton like, int type, String key) {
         this.context = context;
         this.like = like;
+        this.type = type;
         this.key = key;
     }
 
@@ -36,8 +39,8 @@ public class EmptyListener implements View.OnClickListener {
     public void onClick(final View view) {
         final User user = User.getUserInstance();
         if(user.getUserLikeList().indexOf(key) == -1) {
-            final List<String> userLikeList = (List<String>)((ArrayList)User.getUserInstance().getUserLikeList()).clone();
-            userLikeList.add(key);
+            final List<LikeInfo> userLikeList = (List<LikeInfo>)((ArrayList)User.getUserInstance().getUserLikeList()).clone();
+            userLikeList.add(new LikeInfo(type, key));
             FirebaseDatabase.getInstance().getReference().child("user").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("userLikeList").setValue(userLikeList, new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(final DatabaseError databaseError, DatabaseReference databaseReference) {
@@ -50,7 +53,7 @@ public class EmptyListener implements View.OnClickListener {
                             else {
                                 user.setUserLikeList(userLikeList);
                                 like.setImageResource(R.drawable.icon_heart_full);
-                                view.setOnClickListener(new FullListener(context, like, key));
+                                view.setOnClickListener(new FullListener(context, like, type, key));
                             }
                         }
                     });

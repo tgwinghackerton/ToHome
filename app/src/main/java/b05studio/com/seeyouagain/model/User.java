@@ -16,7 +16,8 @@ public class User {
     private String name;
     private String phoneNumber;
     private String token;
-    private List<String> userLikeList = new ArrayList<>();
+    private int point;
+    private List<LikeInfo> userLikeList = new ArrayList<>();
     private List<MissingPersonInfo> infoList = new ArrayList<>();
     private HashMap<String, AlarmInfo> alarmInfos = new HashMap<>();
 
@@ -55,11 +56,11 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public List<String> getUserLikeList() {
+    public List<LikeInfo> getUserLikeList() {
         return userLikeList;
     }
 
-    public void setUserLikeList(List<String> userLikeList) {
+    public void setUserLikeList(List<LikeInfo> userLikeList) {
         this.userLikeList = userLikeList;
     }
 
@@ -93,5 +94,13 @@ public class User {
 
     public void setInfoList(List<MissingPersonInfo> infoList) {
         this.infoList = infoList;
+    }
+
+    public int getPoint() {
+        return point;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
     }
 }
