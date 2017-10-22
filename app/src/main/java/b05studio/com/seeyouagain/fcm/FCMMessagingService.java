@@ -21,6 +21,10 @@ import android.util.Log;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.Request;
 import com.bumptech.glide.request.target.SizeReadyCallback;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.squareup.picasso.Picasso;
@@ -44,6 +48,7 @@ import b05studio.com.seeyouagain.LoginActivity;
 import b05studio.com.seeyouagain.R;
 import b05studio.com.seeyouagain.model.GreenUmInfo;
 import b05studio.com.seeyouagain.model.MissingPersonInfo;
+import b05studio.com.seeyouagain.model.User;
 import b05studio.com.seeyouagain.util.Utils;
 
 /**
@@ -144,6 +149,19 @@ public class FCMMessagingService extends FirebaseMessagingService {
                         Notification n = notificationBuilder.build();
                         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                         notificationManager.notify(null, NOTIFICATION_ID /* ID of notification */, n);
+                        FirebaseDatabase.getInstance().getReference().child("user").child(jsonObj.getString("userKey")).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                User user = dataSnapshot.getValue(User.class);
+                                user.setPoint(user.getPoint()+10);
+                                dataSnapshot.getRef().setValue(user);
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }

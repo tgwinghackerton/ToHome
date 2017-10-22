@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import b05studio.com.seeyouagain.model.MissingPersonInfo;
+import b05studio.com.seeyouagain.model.User;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -39,6 +40,9 @@ public class MissingPersonListActivity extends AppCompatActivity {
 
     @BindView(R.id.list_viewpager)
     ViewPager viewPager;
+
+    @BindView(R.id.list_point)
+    TextView pointView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +84,8 @@ public class MissingPersonListActivity extends AppCompatActivity {
 
             }
         });
+
+        pointView.setText(User.getUserInstance().getPoint() + "P");
     }
 
     @OnClick(R.id.list_alarm)

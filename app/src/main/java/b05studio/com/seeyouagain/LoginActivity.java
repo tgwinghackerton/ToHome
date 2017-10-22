@@ -258,7 +258,6 @@ public class LoginActivity extends DialogActivity implements
                                 user.setToken(user.getToken());
                             else
                                 user.setToken(FirebaseInstanceId.getInstance().getToken());
-                            user.setPoint(0);
                             myRef.child(uid).setValue(user);
                             Log.i("신규 유저 정보", user.toString());
 
@@ -267,6 +266,7 @@ public class LoginActivity extends DialogActivity implements
                             user.setToken(token);
                             user.setUserLikeList(getUserFromDB.getUserLikeList());
                             user.setAlarmInfos(getUserFromDB.getAlarmInfos());
+                            user.setPoint(getUserFromDB.getPoint());
                             myRef.child(uid).setValue(user);
                             Log.i("기존 유저정보", user.toString());
                         }
