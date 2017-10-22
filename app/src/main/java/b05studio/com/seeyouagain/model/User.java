@@ -20,7 +20,7 @@ public class User {
     private List<LikeInfo> userLikeList = new ArrayList<>();
     private List<MissingPersonInfo> infoList = new ArrayList<>();
     private HashMap<String, AlarmInfo> alarmInfos = new HashMap<>();
-
+    private String userId;
     @Exclude
     private String password;
 
@@ -102,5 +102,13 @@ public class User {
 
     public void setPoint(int point) {
         this.point = point;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

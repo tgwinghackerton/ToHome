@@ -259,6 +259,7 @@ public class LoginActivity extends DialogActivity implements
                             else
                                 user.setToken(FirebaseInstanceId.getInstance().getToken());
                             myRef.child(uid).setValue(user);
+                            user.setUserId(uid);
                             Log.i("신규 유저 정보", user.toString());
 
                         } else { // 존재할경우 -> 불러와야함
@@ -268,6 +269,7 @@ public class LoginActivity extends DialogActivity implements
                             user.setAlarmInfos(getUserFromDB.getAlarmInfos());
                             user.setPoint(getUserFromDB.getPoint());
                             myRef.child(uid).setValue(user);
+                            user.setUserId(uid);
                             Log.i("기존 유저정보", user.toString());
                         }
 

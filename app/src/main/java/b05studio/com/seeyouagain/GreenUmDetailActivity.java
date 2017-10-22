@@ -16,6 +16,10 @@ import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -148,6 +152,19 @@ public class GreenUmDetailActivity extends DialogActivity {
                         ShareDialog shareDialog = new ShareDialog(GreenUmDetailActivity.this);
                         shareDialog.show(linkContent, ShareDialog.Mode.AUTOMATIC);
                         GreenUmDetailActivity.this.hideProgressDialog();
+                        FirebaseDatabase.getInstance().getReference().child("user").child(User.getUserInstance().getUserId()).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                User user = dataSnapshot.getValue(User.class);
+                                user.setPoint(user.getPoint()+10);
+                                dataSnapshot.getRef().setValue(user);
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
                     }
                 });
 

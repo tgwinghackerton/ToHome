@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -86,6 +87,34 @@ public class MissingPersonListActivity extends AppCompatActivity {
         });
 
         pointView.setText(User.getUserInstance().getPoint() + "P");
+        FirebaseDatabase.getInstance().getReference().child("user").child(User.getUserInstance().getUserId()).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                long point = dataSnapshot.getValue(Long.class);
+                User.getUserInstance().setPoint((int)point);
+                pointView.setText(User.getUserInstance().getPoint() + "P");
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @OnClick(R.id.list_alarm)
